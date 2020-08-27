@@ -14,7 +14,7 @@ class ProductPage(BasePage):
         super().open()
         self.button_add_to_basket = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET)
         self.name_of_product = self.browser.find_element(*ProductPageLocators.NAME_OF_PRODUCT).text
-        self.amount_of_product = self.browser.find_element(*ProductPageLocators.AMOUNT_OF_PRODUCT).text.replace("£", "")
+        self.amount_of_product = self.browser.find_element(*ProductPageLocators.AMOUNT_OF_PRODUCT).text
 
     def click_button_add_to_basket(self):
         self.button_add_to_basket.click()
@@ -25,11 +25,11 @@ class ProductPage(BasePage):
 
     def should_check_correct_product_name_added(self):
         text = self.browser.find_element(*ProductPageLocators.ALERT_SUCCESS_NAME_PRODUCT).text
-        assert self.name_of_product in text, \
-            f"In first alert success '{text}' not a name of product - '{self.name_of_product}'"
+        assert self.name_of_product == text, \
+            f"Bold text in first alert success '{text}' not equal name of product - '{self.name_of_product}'"
 
     def should_check_basket_amount(self):
         text = self.browser.find_element(*ProductPageLocators.ALERT_SUCCESS_BASKET_AMOUNT).text
-        assert self.amount_of_product in text, \
-            f"In third alert success (basket) '{text}' not a amount of product - '{self.amount_of_product}'"
+        assert self.amount_of_product == text, \
+            f"Bold text in third alert success (basket) '{text}' not equal amount of product - '{self.amount_of_product}'"
 
