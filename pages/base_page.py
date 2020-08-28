@@ -7,11 +7,9 @@ from selenium.webdriver.support import expected_conditions as ec
 
 
 class BasePage:
-    def __init__(self, browser: RemoteWebDriver, url: str, timeout: int = 10):
+    def __init__(self, browser: RemoteWebDriver, url: str):
         self.browser = browser
         self.url = url
-        self.timeout = timeout
-        self.browser.implicitly_wait(self.timeout)
 
     def open(self):
         self.browser.get(self.url)
