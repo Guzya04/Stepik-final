@@ -31,5 +31,13 @@ class ProductPage(BasePage):
     def should_check_basket_amount(self):
         text = self.browser.find_element(*ProductPageLocators.ALERT_SUCCESS_BASKET_AMOUNT).text
         assert self.amount_of_product == text, \
-            f"Bold text in third alert success (basket) '{text}' not equal amount of product - '{self.amount_of_product}'"
+            f"Bold text in third alert success (basket) '{text}' " \
+            f"not equal amount of product - '{self.amount_of_product}'"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ALERT_SUCCESS_NAME_PRODUCT), \
+            "Alert success with name product is presented, but should not be"
+
+    def should_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.ALERT_SUCCESS_NAME_PRODUCT), \
+            "Alert success with name product is not disappeared, but should be"
